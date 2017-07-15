@@ -38,7 +38,12 @@
 							<label class="label label-success" th:text="${titulo.status.descricao}"
 								   th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></label>
 						</td>
-						<td></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" th:href="@{titulos/editar/{codigo}(codigo=${titulo.codigo})}">
+								<span class="glyphicon glyphicon-pencil" title="Editar"></span>
+							</a>
+							
+						</td>
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(titulos)}">Nenhum título foi encontrado</td>
