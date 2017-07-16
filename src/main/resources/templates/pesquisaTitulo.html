@@ -8,6 +8,7 @@
 </head>
 
 <section layout:fragment="conteudo">
+	<div layout:include="mensagemGeral"></div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
@@ -42,6 +43,10 @@
 							<a class="btn btn-link btn-xs" th:href="@{titulos/editar/{codigo}(codigo=${titulo.codigo})}">
 								<span class="glyphicon glyphicon-pencil" title="Editar"></span>
 							</a>
+							<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusao"
+								th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+								<span class="glyphicon glyphicon-remove" title="Excluir"></span>
+							</a>
 							
 						</td>
 					</tr>
@@ -51,6 +56,8 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<div layout:include="dialogoConfirmacaoExclusao"></div>
 	</div>
 </section>
 </html>

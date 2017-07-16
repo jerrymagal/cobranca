@@ -11,7 +11,8 @@
 <section layout:fragment="conteudo">
 	<form class="form-horizontal" method="post" action="/titulos" th:object="${titulo}">
 	
-		<div layout:include="mensagem"></div>
+		<div layout:include="mensagemGeral"></div>
+		<div layout:include="mensagemErro"></div>
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">

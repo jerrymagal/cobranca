@@ -62,6 +62,13 @@ public class TituloController {
 		return Arrays.asList(StatusTitulo.values());
 	}
 	
+	@RequestMapping(value="{codigo}" , method=RequestMethod.DELETE)
+	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
+		repository.delete(codigo);
+		attributes.addFlashAttribute("mensagem", "Título excluido com sucesso.");
+		return "redirect:/titulos";
+	}
+	
 	private ModelAndView retornaViewCadastro(Titulo titulo) {
 		return new ModelAndView(CADASTRO_VIEW).addObject("titulo", titulo);
 	}
