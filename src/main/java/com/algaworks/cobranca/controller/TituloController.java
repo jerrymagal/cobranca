@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.cobranca.enums.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
+import com.algaworks.cobranca.service.TituloService;
 
 @Controller
 @RequestMapping("/titulos")
@@ -26,7 +27,7 @@ public class TituloController {
 	private static final String CADASTRO_VIEW = "cadastroTitulo";
 	
 	@Autowired
-	private Titulos repository;
+	private TituloService service;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -41,18 +42,18 @@ public class TituloController {
 		}
 		
 		try {
-			repository.save(titulo);
+			service.salvar(titulo);
 			attributes.addFlashAttribute("mensagem", "Título salvo com sucesso!");
 			return "redirect:/titulos/novo";
 		} catch (DataIntegrityViolationException e) {
-			errors.rejectValue("dataVencimento", null, "Formato de data inválido");
+			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
 		}
 	}
 	
 	@RequestMapping
 	public ModelAndView pesquisar() {
-		List<Titulo> titulos = repository.findAll();
+		List<Titulo> titulos = service.listar();
 		ModelAndView view = new ModelAndView("pesquisaTitulo");
 		view.addObject("titulos", titulos);
 		return view; 
@@ -70,7 +71,7 @@ public class TituloController {
 	
 	@RequestMapping(value="{codigo}" , method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
-		repository.delete(codigo);
+		service.excluir(codigo);
 		attributes.addFlashAttribute("mensagem", "Título excluido com sucesso.");
 		return "redirect:/titulos";
 	}
