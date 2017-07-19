@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.cobranca.enums.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
-import com.algaworks.cobranca.repository.Titulos;
 import com.algaworks.cobranca.service.TituloService;
 
 @Controller
@@ -74,6 +73,10 @@ public class TituloController {
 		service.excluir(codigo);
 		attributes.addFlashAttribute("mensagem", "Título excluido com sucesso.");
 		return "redirect:/titulos";
+	}
+	
+	public void receber(Long codigo) {
+		
 	}
 	
 	private ModelAndView retornaViewCadastro(Titulo titulo) {
