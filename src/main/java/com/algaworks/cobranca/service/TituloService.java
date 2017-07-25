@@ -30,5 +30,12 @@ public class TituloService {
 	public List<Titulo> listar() {
 		return repository.findAll();
 	}
+	
+	public String receber(Long codigo) {
+		Titulo titulo = repository.findOne(codigo);
+		titulo.receber();
+		repository.save(titulo);
+		return titulo.getStatus().getDescricao();
+	}
 
 }

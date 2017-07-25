@@ -33,5 +33,21 @@ $(function(){
 		
 		var botaoReceber = $(event.currentTarget);
 		var urlReceber = botaoReceber.attr('href');
+		
+		var response = $.ajax({
+			url: urlReceber,
+			type: 'PUT'
+		});
+		
+		response.done(function(e){
+			var codigo = botaoReceber.data('codigo');
+			$('[data-role=' + codigo + ']').html('<label class="label label-success">' + e + '</label>');
+			botaoReceber.hide();
+		});
+		
+		response.fail(function(e){
+			console.log(e);
+			alert('Erro recebendo cobrança');
+		});
 	});
 });

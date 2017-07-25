@@ -89,6 +89,10 @@ public class Titulo {
 		return this.status.equals(StatusTitulo.PENDENTE);
 	}
 
+	public void receber() {
+		this.status = StatusTitulo.RECEBIDO;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,4 +117,5 @@ public class Titulo {
 			return false;
 		return true;
 	}
+
 }
